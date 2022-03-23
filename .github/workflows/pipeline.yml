@@ -23,6 +23,6 @@ jobs:
       #   run: npm run test
       - uses: cypress-io/github-action@v2.9.7
         with:
-          start: npm run start
-          wait-on: http://localhost:8080
+          start: npm run start-prod
+          wait-on: http://localhost:3000
       
