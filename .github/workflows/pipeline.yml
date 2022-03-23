@@ -15,12 +15,12 @@ jobs:
           node-version: '16'
       - name: npm install
         run: npm install
-      # - name: npm run eslint
-      #   run: npm run eslint
+      - name: npm run eslint
+        run: npm run eslint
       - name: npm run build
         run: npm run build
-      # - name: npm run test
-      #   run: npm run test
+      - name: npm run test
+        run: npm run test-jest
       - uses: cypress-io/github-action@v2.9.7
         with:
           start: npm run start-prod
