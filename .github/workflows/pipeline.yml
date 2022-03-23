@@ -10,17 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.0
-      - uses: actions/setup-node@v3.0.0
-        with:
-          node-version: '16'
-      - name: npm install
-        run: npm install
-      - name: npm run eslint
-        run: npm run eslint
-      - name: npm run build
-        run: npm run build
-      - name: npm run test
-        run: npm run test
+      # - uses: actions/setup-node@v3.0.0
+      #   with:
+      #     node-version: '16'
+      # - name: npm install
+      #   run: npm install
+      # - name: npm run eslint
+      #   run: npm run eslint
+      # - name: npm run build
+      #   run: npm run build
+      # - name: npm run test
+      #   run: npm run test
       - uses: cypress-io/github-action@v2.9.7
         with:
           start: npm run start
