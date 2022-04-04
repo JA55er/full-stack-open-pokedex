@@ -1,1 +1,1 @@
-web: npm run start-prod
+wxeb: npm run start-prod
