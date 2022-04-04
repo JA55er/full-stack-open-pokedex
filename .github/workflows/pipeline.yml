@@ -30,4 +30,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fs-part11-workflow"
           heroku_email: "tautvydas.glav@gmail.com"
+          healthcheck: "https://fs-part11-workflow.herokuapp.com/health"
+          checkstring: "ok"
       
