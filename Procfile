@@ -1,1 +1,1 @@
-wedddb: npm rssun start-prod
+web: npm run start-prod

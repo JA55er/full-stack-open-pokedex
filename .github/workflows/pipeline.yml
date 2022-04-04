@@ -32,4 +32,5 @@ jobs:
           heroku_email: "tautvydas.glav@gmail.com"
           healthcheck: "https://fs-part11-workflow.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       
