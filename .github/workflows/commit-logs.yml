@@ -3,13 +3,13 @@ name: Testing stuff
 on:
   push:
     branches:
-      - main
+      - commit-logs
 
 jobs:
   a_test_job:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.0.0
       - name: gihub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
