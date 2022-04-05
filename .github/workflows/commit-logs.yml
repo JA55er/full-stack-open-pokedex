@@ -3,7 +3,11 @@ name: Testing stuff
 on:
   push:
     branches:
+      - master
       - commit-logs
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   a_test_job:
@@ -22,3 +26,9 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: check condition with false
+        if:  ${{!contains(toJson(github.event.commits.*.message), '#skip')}}
+        run: echo "false"
+      - name: check condition with true
+        if: ${{contains(toJson(github.event.commits.*.message), '#skip')}}
+        run: echo "true"
