@@ -12,7 +12,7 @@ app.get('/health', (req, res) => {
 
 app.get('/version', (req, res) => {
   res.send(Date())
-})
+});
 
 app.listen(PORT, () => {
   console.log('server started on port 5000')
