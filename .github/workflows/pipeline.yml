@@ -38,6 +38,15 @@ jobs:
           healthcheck: "https://fs-part11-workflow.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Test Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          text: build Failed
+          description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor) broke the build
   tag_release:
     if: ${{!contains(toJson(github.event.commits.*.message), '#skip')}}
     needs: [simple_deployment_pipeline]
@@ -50,3 +59,21 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: "patch"
+    - name: Test Success
+      uses: rjstone/discord-webhook-notify@v1
+      if: success()
+      with:
+        severity: info
+        details: Test Succeeded!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        text: a new version deployed
+        description: to https://fs-part11-workflow.herokuapp.com/ by ${{toJson(github.actor)}}
+    - name: Test Failure
+      uses: rjstone/discord-webhook-notify@v1
+      if: failure()
+      with:
+        severity: error
+        details: Test Failed!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        text: build Failed
+        description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor) broke the build
