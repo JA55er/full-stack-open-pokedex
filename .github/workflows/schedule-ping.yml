@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '0 4 * * *'
+    - cron: '0 8 * * *'
 
 jobs:
   test_schedule:
@@ -10,3 +10,21 @@ jobs:
         uses: jtalk/url-health-check-action@v2
         with:
           url: https://fs-part11-workflow.herokuapp.com/
+      - name: Deploy Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Test Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          text: scheduled ping
+          description: ping for 8 o'clock
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Test Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          text: build Failed
+          description: ping failed
