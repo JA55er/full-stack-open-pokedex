@@ -1,0 +1,12 @@
+on:
+  schedule:
+    - cron: '0 4 * * *'
+
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: schedule ping
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://fs-part11-workflow.herokuapp.com/
