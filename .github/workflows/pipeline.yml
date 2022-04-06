@@ -46,7 +46,7 @@ jobs:
           details: Test Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           text: build Failed
-          description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor) broke the build
+          description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor)}} broke the build
   tag_release:
     if: ${{!contains(toJson(github.event.commits.*.message), '#skip')}}
     needs: [simple_deployment_pipeline]
@@ -76,4 +76,4 @@ jobs:
         details: Test Failed!
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         text: build Failed
-        description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor) broke the build
+        description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor)}} broke the build
