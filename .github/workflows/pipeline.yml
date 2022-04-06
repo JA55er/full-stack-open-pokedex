@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.0
+      - name: gihub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - uses: actions/setup-node@v3.0.0
         with:
           node-version: '16'
@@ -46,7 +50,7 @@ jobs:
           details: Test Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           text: build Failed
-          description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor)}} broke the build
+          description: commit https://github.com/JA55er/full-stack-open-pokedex/commit/${{toJson(github.event.after)}} by ${{toJson(github.actor)}} broke the build
       - name: Deploy Success
         uses: rjstone/discord-webhook-notify@v1
         if: ${{success() && github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')}}
