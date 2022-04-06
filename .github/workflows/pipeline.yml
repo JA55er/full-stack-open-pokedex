@@ -59,7 +59,7 @@ jobs:
           details: Test Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           text: a new version deployed
-          description: to https://fs-part11-workflow.herokuapp.com/ by ${{toJson(github.actor)}}
+          description: to https://fs-part11-workflow.herokuapp.com/ by ${{github.actor}}
   tag_release:
     if: ${{!contains(toJson(github.event.commits.*.message), '#skip')}}
     needs: [simple_deployment_pipeline]
@@ -80,4 +80,4 @@ jobs:
         details: Test Failed!
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         text: build Failed
-        description: commit ${{toJson(github.event.commits.*.url)}} by ${{toJson(github.actor)}} broke the build
+        description: commit ${{github.event.commits.*.url}} by ${{github.actor}} broke the build
